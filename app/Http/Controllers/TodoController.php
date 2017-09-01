@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Models\Todo;
 
+use App\Managers\ManagerFactory as Manager;
+
 class TodoController extends Controller
 {
     // public function __invoke()
@@ -37,12 +39,17 @@ class TodoController extends Controller
         return \Validator::make($data, $rules);
     }
 
-    public function getAll()
+    public function index()
 	{
 		return $this->listResponse($this->playerManager->all());
 	}
 
-    public function save(Request $request)
+	public function store(Request $request)
+	{
+		return $this->create($request);
+	}
+
+    public function create(Request $request)
 	{
 	    $validator = $this->validator($request->all(), null);
 		
@@ -58,7 +65,17 @@ class TodoController extends Controller
 		}
 	}
 
+	public function show(Request $request, $id)
+	{
+		return 'implement';
+	}
+
 	public function edit(Request $request, $id)
+	{
+		return 'implement';
+	}
+
+	public function update(Request $request, $id)
 	{
 		$validator = $this->validator($request->all(), [
 			'PlayerLogin'    => 'unique:players|max:20',
@@ -76,7 +93,7 @@ class TodoController extends Controller
 		}
 	}
 
-	public function delete($id)
+	public function destroy($id)
 	{
 		try{
 			$this->playerManager->delete($id);
