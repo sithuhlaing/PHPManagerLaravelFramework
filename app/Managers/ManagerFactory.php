@@ -12,12 +12,12 @@ class ManagerFactory
 	{
 		switch ($value) {
 
-			case self::PlayerManager:
-				if(self::$pm == null){
-					$pm = self::PlayerManager;
-					self::$pm = new $pm;
+			case self::TodoManager:
+				if(self::$todoManager == null){
+					$todoManager = self::TodoManager;
+					self::$todoManager = new $todoManager;
 				} 				
-				return self::$pm;
+				return self::$todoManager;
 
 			default:
 				return null;
